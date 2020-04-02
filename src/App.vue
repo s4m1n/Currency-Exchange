@@ -1,7 +1,12 @@
 <template>
   <div id="app">
-    <div v-if="toCurrency || fromCurrency">
-      <h1>
+    <div class="navbar bg-primary">
+      <h1 class="heading">
+        <i class="fas fa-coins" style="margin-right: 0.25rem"></i>Currency Exchange
+      </h1>
+    </div>
+    <div v-if="toCurrency || fromCurrency" class="container">
+      <h1 class="conversion">
         {{ from }} {{ fromCurrency }} equals to {{ exchangeRate }}
         {{ toCurrency }}
       </h1>
@@ -25,9 +30,10 @@
 </template>
 
 <script>
-import CurrencyRow from './components/CurrencyRow';
+import CurrencyRow from "./components/CurrencyRow";
+
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
       row1: true,
@@ -43,7 +49,9 @@ export default {
       return this.$store.getters.amount;
     },
     currencyOptions: function() {
-      return this.$store.getters.currencyOptions;
+      let sorted = this.$store.getters.currencyOptions;
+      let s = sorted.sort();
+      return s;
     },
     fromCurrency: function() {
       return this.$store.getters.fromCurrency;
@@ -72,21 +80,21 @@ export default {
   },
   methods: {
     fetchRates: function() {
-      this.$store.dispatch('fetchRates');
+      this.$store.dispatch("fetchRates");
     },
     amountOne: function(value) {
       const payload = {
         amount: value,
         amountInFromCurrency: this.row1
       };
-      this.$store.dispatch('setAmount', payload);
+      this.$store.dispatch("setAmount", payload);
     },
     amountTwo: function(value) {
       const payload = {
         amount: value,
         amountInFromCurrency: this.row2
       };
-      this.$store.dispatch('setAmount', payload);
+      this.$store.dispatch("setAmount", payload);
     },
     rowOneCurrency: function(value) {
       const payload = {
@@ -94,7 +102,7 @@ export default {
         amountInFromCurrency: this.row1,
         toCurrency: this.toCurrency
       };
-      this.$store.dispatch('setCurrency', payload);
+      this.$store.dispatch("setCurrency", payload);
     },
     rowTwoCurrency: function(value) {
       const payload = {
@@ -102,17 +110,8 @@ export default {
         amountInFromCurrency: this.row2,
         fromCurrency: this.fromCurrency
       };
-      this.$store.dispatch('setCurrency', payload);
+      this.$store.dispatch("setCurrency", payload);
     }
-    // amountCalculation: function() {
-    //   if (this.amountInFromCurrency) {
-    //     this.fromAmount = this.amount;
-    //     this.toAmount = this.amount * this.exchangeRate;
-    //   } else {
-    //     this.toAmount = this.amount;
-    //     this.fromAmount = this.amount / this.exchangeRate;
-    //   }
-    // }
   },
   created() {
     this.fetchRates();
@@ -121,20 +120,65 @@ export default {
 </script>
 
 <style>
-body {
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;500&display=swap");
+/* body {
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   text-align: center;
   background-color: cornsilk;
-}
-
-h1 {
+} */
+* {
+  box-sizing: border-box;
   margin: 0;
-  margin-bottom: 2rem;
-  color: darkslategrey;
+  padding: 0;
+}
+body {
+  font-family: "Baloo Bhai 2", cursive;
+  font-size: 1rem;
+  line-height: 1.6;
+  background: #3e5151; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #decba4,
+    #3e5151
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #decba4,
+    #3e5151
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #333;
+}
+.heading {
+  color: cornsilk;
+}
+.conversion {
+  color: #3c3b3f;
+  margin-bottom: 1rem;
+}
+.bg-primary {
+  background: #3c3b3f;
+  color: #fff;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 2rem;
+  z-index: 1;
+  width: 100%;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+.container {
+  max-width: 1100px;
+  margin: auto;
+  margin-top: 50px;
+  text-align: center;
+  overflow: hidden;
+  padding: 0 2rem;
 }
 .input {
   border: 1px solid #333;
