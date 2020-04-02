@@ -49,9 +49,7 @@ export default {
       return this.$store.getters.amount;
     },
     currencyOptions: function() {
-      let sorted = this.$store.getters.currencyOptions;
-      let s = sorted.sort();
-      return s;
+      return this.$store.getters.currencyOptions;
     },
     fromCurrency: function() {
       return this.$store.getters.fromCurrency;

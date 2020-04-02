@@ -31,8 +31,11 @@ export default new Vuex.Store({
   },
   mutations: {
     fetchRates: (state, payload) => {
-      state.currencyOptions = [payload.base, ...Object.keys(payload.rates)];
-      const firstCurrency = Object.keys(payload.rates)[0];
+      state.currencyOptions = [
+        payload.base,
+        ...Object.keys(payload.rates)
+      ].sort();
+      const firstCurrency = Object.keys(payload.rates).sort()[0];
       state.toCurrency = firstCurrency;
       state.fromCurrency = payload.base;
       state.exchangeRate = payload.rates[firstCurrency];
