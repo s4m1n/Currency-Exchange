@@ -172,8 +172,7 @@ body {
 }
 .container {
   max-width: 1100px;
-  margin: auto;
-  margin-top: 50px;
+  margin: 0 auto;
   text-align: center;
   overflow: hidden;
   padding: 0 2rem;

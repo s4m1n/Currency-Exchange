@@ -38,25 +38,25 @@ export default new Vuex.Store({
       const firstCurrency = Object.keys(payload.rates).sort()[0];
       state.toCurrency = firstCurrency;
       state.fromCurrency = payload.base;
-      state.exchangeRate = payload.rates[firstCurrency];
+      state.exchangeRate = payload.rates[firstCurrency].toFixed(3);
       if (state.amountInFromCurrency) {
         state.fromAmount = state.amount;
-        state.toAmount = state.amount * state.exchangeRate;
+        state.toAmount = (state.amount * state.exchangeRate).toFixed(3);
         state.from = state.fromAmount;
         state.to = state.toAmount;
       } else {
         state.toAmount = state.amount;
-        state.fromAmount = state.amount / state.exchangeRate;
+        state.fromAmount = (state.amount / state.exchangeRate).toFixed(3);
       }
     },
     setAmount: (state, payload) => {
       state.amount = payload.amount;
       if (payload.amountInFromCurrency) {
         state.fromAmount = state.amount;
-        state.toAmount = state.amount * state.exchangeRate;
+        state.toAmount = (state.amount * state.exchangeRate).toFixed(3);
       } else {
         state.toAmount = state.amount;
-        state.fromAmount = state.amount / state.exchangeRate;
+        state.fromAmount = (state.amount / state.exchangeRate).toFixed(3);
       }
       // state.fromAmount = state.amount;
       // state.toAmount = state.amount * state.exchangeRate;
@@ -64,13 +64,17 @@ export default new Vuex.Store({
     },
     setCurrency: (state, payload) => {
       if (payload.payload.amountInFromCurrency) {
-        state.exchangeRate = payload.response.rates[payload.payload.toCurrency];
+        state.exchangeRate = payload.response.rates[
+          payload.payload.toCurrency
+        ].toFixed(3);
         state.fromCurrency = payload.payload.currency;
-        state.toAmount = state.amount * state.exchangeRate;
+        state.toAmount = (state.amount * state.exchangeRate).toFixed(3);
       } else {
-        state.exchangeRate = payload.response.rates[payload.payload.currency];
+        state.exchangeRate = payload.response.rates[
+          payload.payload.currency
+        ].toFixed(3);
         state.toCurrency = payload.payload.currency;
-        state.toAmount = state.amount * state.exchangeRate;
+        state.toAmount = (state.amount * state.exchangeRate).toFixed(3);
       }
     }
   },
