@@ -2,7 +2,7 @@
   <div id="app">
     <div class="navbar bg-primary">
       <h1 class="heading">
-        <i class="fas fa-coins" style="margin-right: 0.25rem"></i>Currency Exchange
+        <i class="fas fa-coins" style="margin-right: 0.25rem"></i>Currency Xchange
       </h1>
     </div>
     <div v-if="toCurrency || fromCurrency" class="container">
