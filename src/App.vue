@@ -11,6 +11,7 @@
         {{ toCurrency }}
       </h1>
       <currency-row
+        class="currency"
         :currencyOptions="currencyOptions"
         :selectedCurrency="fromCurrency"
         :amount="fromAmount"
@@ -19,6 +20,7 @@
       />
       <div class="equals">=</div>
       <currency-row
+        class="currency"
         :currencyOptions="currencyOptions"
         :selectedCurrency="toCurrency"
         :amount="toAmount"
@@ -193,5 +195,15 @@ select {
 .equals {
   font-weight: bold;
   font-size: 2rem;
+}
+@media only screen and (max-width: 353px) {
+  h1 {
+    text-align: center;
+    font-size: 30px;
+  }
+  .currency {
+    display: flex;
+    justify-content: center;
+  }
 }
 </style>
