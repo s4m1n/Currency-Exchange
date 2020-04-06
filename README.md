@@ -1,4 +1,4 @@
-# currency-exchange
+# DEMO: [Currency Exchange](https://currency-exchange-107405.netlify.com/).
 
 ## Project setup
 ```
